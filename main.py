@@ -25,6 +25,7 @@ root = Tk()
 #----------
 # Data ###
 # read file
+inputPath = './data/tweets.csv'
 outputPath = './output/results.csv'
 
 count = 0
@@ -41,7 +42,7 @@ dataPosition = IntVar()
 dataPosition.set(count - 1)
 data = []
 
-with open('./data/tweets.csv', newline='', encoding='utf8') as csvfile:
+with open(inputPath, newline='', encoding='utf8') as csvfile:
     reader = csv.DictReader(csvfile)
     for row in reader:
         data.append(row)
@@ -89,8 +90,8 @@ def submitScoring(tweetDict):
             writer.writeheader()
         
         writer.writerow({
-            'author_id': tweetDict['author_id'],
-            'tweet_id': tweetDict['tweet_id'],
+            'author_id': str(tweetDict['author_id']), # Read as string
+            'tweet_id': str(tweetDict['tweet_id']), # Read as string
             'text': tweetDict['text'],
             'sentiment_polarity': sentimentPolarity.get(),
             'irony_or_sarcasm': ironyOrSarcasm.get(),
