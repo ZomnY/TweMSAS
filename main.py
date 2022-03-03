@@ -90,7 +90,9 @@ def submitScoring(tweetDict):
         
         writer.writerow({
             'author_id': tweetDict['author_id'],
-            'tweet_id': tweetDict['tweet_id'],
+            'tweet_id': tweetDict['\ufefftweet_id'],    # this is an ugly ass mod, because the data was stored as UTF8 for the special characters.
+                                                        # this apparently appends an utf8 signifier in front of the first line (which has the tweet_id as first cell)
+                                                        # this utf8 signifier is "\ufeff"
             'text': tweetDict['text'],
             'sentiment_polarity': sentimentPolarity.get(),
             'irony_or_sarcasm': ironyOrSarcasm.get(),
